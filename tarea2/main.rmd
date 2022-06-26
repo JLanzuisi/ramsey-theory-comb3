@@ -1,0 +1,74 @@
+---
+title: "Tarea 2"
+subtitle: "Combinatoria III"
+author: "Jhonny Lanzuisi"
+date: "9 de Junio de 2022"
+fontsize: 10pt
+lang: es-ES
+documentclass: scrartcl
+classoption: twocolumn,DIV=18,toc=flat
+output:
+  pdf_document:
+    number_sections: true
+    toc: true
+    toc_depth: 3
+    fig_caption: true
+    highlight: pygments
+    latex_engine: pdflatex
+    extra_dependencies: ["mlmodern","plex-mono"]
+    keep_tex: true
+    includes:
+      in_header: preamble.tex
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Primera pregunta
+
+Para ver que los $U_s$ son una base, basta con ver que
+si $r\in U$, donde $U$ es un abierto de la topología producto,
+entonces existe un $U_s$ tal que $r\in U_s\subset U$ 
+(Munkres, \emph{Topology}, Capitulo II, lema 13.2).
+
+En este caso, como dotamos a $\mathbb{N}$ de la topologia discreta,
+los abiertos de la topología producto son los conjuntos de sucesiones infinitas.
+
+Entonces dada una sucesion infinita $r$ podemos considerar
+la sucesion finita $s$ que se obtiene de tomar los primeros
+$k$ elementos de $r$. Entonces, el conjunto $U_s$ contiene
+a $r$.
+
+Además como toda sucesion de $U_s$ es infinita,
+tenemos que $U_s$ es en si mismo un conjunto abierto
+por lo que la condición $U_s\subset U$ se cumple.
+
+# Segunda pregunta
+
+Consideremos el complemento de $U_s$, $U_s^c$, en $\mathbb{N}^\mathbb{N}$.
+Entonces $U_s^c$ es el conjunto de todas las sucesiones infinitas que difieren
+de $s$ en su dominio. Pero este conjunto, por ser de sucesiones infinitas, es abierto,
+como dijimos antes.
+
+Se sigue que $U_s$ es cerrado.
+
+# Tercera pregunta
+
+Sea $\{x_k\}$ una sucesión de cauchy.
+Entonces dado $\epsilon = 1/n$ existe un $N$ tal que
+$d(x_n,x_m)<1/n$ siempre que $n,m>N$.
+
+Pero esto significa que
+$$
+    \frac{1}{\min\{i\colon x_n(i)\neq x_m(i)\}} < \frac{1}{n},
+$$
+por lo que las suceciones $x_n$ y $x_m$ coinciden
+hasta $n$.
+
+Sea $\{r_k\}$ una sucesión que coincide con $x_n$ y $x_m$
+en estos primeros $n$ términos. Entonces dado $\epsilon>0$ existe
+$n$ tal que $1/n<\epsilon$. La propiedad de
+cauchy asegura que existe un $N$ tal que $d(x_k,r_k)<1/n<\epsilon$
+siempre que $k>N$, puesto que $r_k$ coincide con $x_k$ en los
+primeros $n$ términos por construcción.

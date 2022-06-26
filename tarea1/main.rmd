@@ -1,0 +1,127 @@
+---
+title: "Tarea 1"
+subtitle: "Combinatoria III"
+author: "Jhonny Lanzuisi"
+date: "9 de Junio de 2022"
+fontsize: 10pt
+lang: es-ES
+documentclass: scrartcl
+classoption: twocolumn,DIV=18,toc=flat
+output:
+  pdf_document:
+    number_sections: true
+    toc: true
+    toc_depth: 3
+    fig_caption: true
+    highlight: pygments
+    latex_engine: pdflatex
+    extra_dependencies: ["mlmodern","plex-mono"]
+    keep_tex: true
+    includes:
+      in_header: preamble.tex
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Primera pregunta
+
+Podemos suponer que $A$ es numerable sin perdida de generalidad, puesto que de no serlo tendria un subconjunto infinito numerable, y el argumento aplicaria igualmente para este conjunto.
+
+Definimos una coloracion $f:A^{[2]}\to 2$:
+$$
+  f(\{a,b\}) = \begin{cases}
+                0 \quad\text{si $a$ y $b$ son comparables}\\
+                1 \quad\text{si $a$ y $b$ no son comparables}
+               \end{cases}
+$$
+
+El teorema de Ramsey asegura que existe un subconjunto infinito $H$ de $A$
+que es monocromatico bajo esta $f$. Esto quiere decir que:
+
+* o los $a,b$ no son comparables dos a dos, en cuyo caso ya tenemos uno de los
+casos que queremos demostrar,
+* o todos los $a,b$ son comparables. Supongamos que estamos en este caso y
+llamemos a este conjunto $C$.
+
+Tomemos $c\in C$ fijo. Entonces podemos definir otra coloracion $g_c:C^{[1]}\to 2$:
+$$
+  g_c(s) = \begin{cases}
+                0 \quad\text{si $s<c$}\\
+                1 \quad\text{si $s>c$}
+               \end{cases}
+$$
+
+En este caso $g$ es simplemente una particion de $C$. Podemos considerar los conjuntos $C_0,C_1$ de todos los elementos que tienen color $0$ o color $1$, respectivamente. Entonces el principio del casillero asegura que al menos uno de estos dos conjuntos es infinito. Supongamos que $C_1$ es infinito,
+entonces podemos fijar un $c_1\in C_1$ y considerar la particion dada por $g_{c_1}\colon C_1^{[2]}\to 2$. Como $C_1$ esta acotado inferiormente por $c$, y $C_1$ es numerable, se tiene que el conjunto de los elementos que tiene color $1$ por $g_{c_1}$ (llamemoslo $C_{11}$) es infinito y los que tienen color $0$, nuevamente por $g_{c_1}$, son un conjunto finito.
+Podemos entonces continuar de esta forma, tomando un $c_2\in C_{11}$ y considerando la particion dada por $g_{c_2}$, etc. Obtenemos de esta forma una sucesion
+$$
+  H_1 = \{c,c_1,c_2,\dots\}
+$$
+que es creciente y es infinita.
+
+Es claro que de haber supuesto que $C_0$ era infinito en vez de $C_1$ obtendriamos un conjunto $H_0$ decreciente, de forma simetrica a como se contruyo $H_1$.
+
+Por lo tanto, en $A$ pueden ocurrir tres casos: o hay un subconjunto infinito $H$ donde ningun elemento es comprable con otro, o existe un subconjunto $H_0$ decreciente o un subconjunto $H_1$ creciente.
+
+# Segunda pregunta
+
+Haremos la demostración por reducción al absurdo.
+Dado $k$ entero positivo supongamos que existe $N=k^2+1$
+tal que toda sucesión de $N$ números naturales distintos
+contiene una subsucesión de a lo sumo tamaño $k$
+que es mónotona.
+
+Sea $S = \{x_1,\dots,x_N\}$ la sucesión dada. Consideremos para $1\leq i\leq N$
+los pares de enteros $(a_i,b_i)$ donde $a_i$ es la longitud de la sucesión *creciente*
+de mayor tamaño que termina en $x_i$, y $b_i$ es la longitud de la sucesión *decreciente*
+de mayor tamaño que termina en $x_i$.
+
+Veamos ahora que los $(a_i,b_i)$ son todos distintos. Si $x_i>x_j$
+entonces $a_i>a_j$ puesto que la subsucesión de $a_j$ siempre se
+puede extender hasta llegar a $a_i$. Si $x_j>x_i$ entonces $b_j>b_i$
+por la misma razon que antes.
+
+Finalmente, como los $(a_i,b_i)$ son todos distintos y $0\leq a_i\leq k,$
+$0\leq b_i\leq k$, hay a lo sumo $k^2$ pares. Pero esto es una contradicción
+puesto que supusimos $N=k^2+1$ pares.
+
+Se sigue entonces que la suseción $S$ ha de tener una subsucesión monótona
+de tamaño mayor o igual que $k+1$.
+
+# Tercera pregunta
+
+Haremos la demostración por reducción al absurdo.
+Supongamos que $GS(con)\land\neg\, GS$.
+Esto quiere decir que dado $k\in \mathbb{N}^*$ existe
+una coloración $f\colon\mathbb{N}^*\to r$ tal que
+$FS(\{ x_1,\dots,x_k \})$ no es monocromático
+para ningún subconjunto $\{ x_1,\dots,x_k \}$ de $\mathbb{N}$.
+
+Podemos construir una coloración $g\colon FU(\mathbb{N}^{[<\infty]})\to r$.
+Dado que la cantidad de subconjuntos finitos de $\mathbb{N}$ es numerable,
+existe una correspondencia uno a uno entre $\mathbb{N}^{[<\infty]}$ y $\mathbb{N}$.
+Llamemos a esta biyección $c$.
+Definimos $g$ de la siguiente forma:
+$$
+	g(\bigcup a_i) = f(\sum c(a_i)).
+$$
+
+Entonces el hecho de que no existe ningún subconjunto $\{ x_1,\dots,x_k \}$ de $\mathbb{N}$
+ tal que $FS(\{ x_1,\dots,x_k \})$ sea monocromático bajo $f$
+implica que ningún subconjunto $\{ a_1,\dots,a_k \}$ de $\mathbb{N}^{[<\infty]}$
+es tal que $FU(\{ a_1,\dots,a_k \})$ es monocromático bajo $g$.
+
+Pero la función $g$ induce una coloración $h\colon\mathbb{N}^{[<\infty]}\to r$,
+dada por
+$$
+	h(a_i) = g(a_i\cup\emptyset).
+$$
+Es evidente, por construcción, que cuando tenemos una unión finita no trivial
+de elementos de $\mathbb{N}^{[<\infty]}$, $h$ y $g$ coinciden en dicha unión.
+Pero esto implica que ningún subconjunto $\{ a_1,\dots,a_k \}$ de $\mathbb{N}^{[<\infty]}$
+es monocromático bajo $h$, lo cual contradice $GS(con)$.
+
+Por lo tanto, debemos tener que $GS(con)\implies GS$, que es
+lo que buscabamos demostrar.
